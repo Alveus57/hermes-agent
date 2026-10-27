@@ -103,12 +103,6 @@ export function openPenLibrary(): void {
   $penLibraryOpen.set(true)
 }
 
-async function refreshPenSessionSuggestion(sessionId: null | string): Promise<void> {
-  const { refreshPenSessionSuggestion: refresh } = await import('@/store/suggestion-providers/pen')
-
-  await refresh(sessionId)
-}
-
 export async function restorePenCanvas(sessionId: string): Promise<boolean> {
   const pen = window.hermesDesktop?.pen
 
@@ -160,7 +154,6 @@ export function watchPenSession(): () => void {
 
     if (wasDraft && penCanvasTileOpen()) {
       await pen.adopt?.(sessionId).catch(() => {})
-      void refreshPenSessionSuggestion(sessionId)
 
       return
     }
@@ -176,8 +169,6 @@ export function watchPenSession(): () => void {
     } else if (penCanvasTileOpen()) {
       hidePenCanvasTile()
     }
-
-    void refreshPenSessionSuggestion(sessionId)
   }
 
   void sync($selectedStoredSessionId.get())
@@ -190,10 +181,6 @@ export function watchPenSession(): () => void {
             closePenCanvasTile()
           }
         })
-      }
-
-      if (event === 'open-document' || event === 'close-document') {
-        void refreshPenSessionSuggestion($selectedStoredSessionId.get())
       }
     }) ?? (() => {})
 
