@@ -4,6 +4,7 @@ import time
 import pytest
 from agent.rate_limit_tracker import (
     RateLimitBucket,
+    _fmt_count,
     parse_rate_limit_headers,
 )
 
