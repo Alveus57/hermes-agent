@@ -4787,7 +4787,8 @@ export const deOverrides = {
     saveApply: 'Speichern & anwenden',
     notExpressible: 'diese Anordnung greift ineinander (Windrad) — noch nicht als verschachtelte Splits ausdrückbar',
     zoneCount: count => `${count} Zonen`,
-    tabCount: count => `${count} Tabs`
+    tabCount: count => `${count} Tabs`,
+    tabActions: title => `Aktionen für ${title}`
   },
   contextMenu: {
     link: {
